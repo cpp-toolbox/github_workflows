@@ -7,6 +7,9 @@ on:
         required: false
         type: string
         default: "."
+    secrets:
+      checkout_ssh_key:
+        required: false
 
 jobs:
   build:
@@ -25,7 +28,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          ssh-key: ${{ CHECKOUT_SSH_KEY || '' }}
+          ssh-key: ${{ secrets.checkout_ssh_key }}
 
       - name: Install Conan
         uses: conan-io/setup-conan@v1
