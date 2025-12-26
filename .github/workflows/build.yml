@@ -26,6 +26,14 @@ jobs:
         with:
           submodules: recursive
           ssh-key: ${{ secrets.checkout_ssh_key }}
+          
+      - name: Debug cwd and files
+        working-directory: ${{ inputs.project_dir }}
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Files in current directory:"
+          ls -R
 
       - name: Install Conan
         uses: conan-io/setup-conan@v1
