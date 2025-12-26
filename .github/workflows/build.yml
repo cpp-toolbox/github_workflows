@@ -2,6 +2,11 @@ name: Build (Windows / macOS / Linux)
 
 on:
   workflow_call:
+    inputs:
+      project_dir:
+        required: false
+        type: string
+        default: "."
 
 jobs:
   build:
@@ -11,6 +16,9 @@ jobs:
         os: [windows-latest, ubuntu-latest, macos-latest, macos-15-intel]
 
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.project_dir }}
 
     steps:
       - name: Checkout repository
